@@ -1,4 +1,4 @@
-package com.example.mynotes.db
+package com.example.myroom
 
 interface RecyclerViewEvent {
     fun onItemClick(position: Int)

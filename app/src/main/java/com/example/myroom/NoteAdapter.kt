@@ -1,4 +1,4 @@
-package com.example.mynotes
+package com.example.myroom
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynotes.db.NoteClass
-import com.example.mynotes.db.RecyclerViewEvent
+import com.example.myroom.dbRoom.Note
 
-class NoteAdapter(private val notes: List<NoteClass>,
+class NoteAdapter(private val notes: List<Note>,
                   private val listener: RecyclerViewEvent
                   ) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
@@ -43,7 +42,7 @@ class NoteAdapter(private val notes: List<NoteClass>,
         holder.cardView.tag = notes[position].id
         holder.title.text = notes[position].title
         if(notes[position].content.length >= 20)
-        holder.content.text = notes[position].content.substring(0,19) + "..."
+            holder.content.text = notes[position].content.substring(0,19) + "..."
         else holder.content.text = notes[position].content
 
     }

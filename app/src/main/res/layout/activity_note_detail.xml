@@ -11,8 +11,8 @@
         android:id="@+id/etTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:text=""
+        android:textSize="30sp"
+        android:background="#EDA74A"
         android:hint="Введите заголовок..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,8 @@
         android:layout_marginTop="10dp"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:textSize="15sp"
+        android:textSize="20sp"
+        android:background="#EDA74A"
         android:hint="Введите содержимое..."
         app:layout_constraintBottom_toTopOf="@+id/llButtons"
         app:layout_constraintEnd_toEndOf="@+id/etTitle"
@@ -51,6 +52,7 @@
             android:background="@drawable/circle_button"
             android:text="SAVE"
             android:textColor="@color/white"
+            android:layout_marginTop="5dp"
             android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -59,10 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/circle_button"
             android:text="DELETE"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

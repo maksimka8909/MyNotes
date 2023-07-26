@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:hint="Введите заголовок..."
+        android:background="#EDA74A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,8 +26,9 @@
         android:layout_marginTop="20dp"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:hint="Введите содержимое..."
+        android:background="#EDA74A"
         app:layout_constraintBottom_toTopOf="@+id/llButtons"
         app:layout_constraintEnd_toEndOf="@+id/etTitle"
         app:layout_constraintStart_toStartOf="@+id/etTitle"
@@ -50,6 +52,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/circle_button"
             android:text="ADD"
+            android:layout_marginTop="5dp"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
