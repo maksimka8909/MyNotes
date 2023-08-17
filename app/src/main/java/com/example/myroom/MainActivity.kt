@@ -5,9 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import com.example.myroom.databinding.ActivityMainBinding
 import com.example.myroom.dbRoom.MainDb
 import com.example.myroom.dbRoom.Note
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -21,9 +23,9 @@ class MainActivity : AppCompatActivity() {
             val note = Note(null,binding.etTitle.text.toString(),
             binding.etContent.text.toString())
 
-            Thread{
+            lifecycleScope.launch{
                 db.getDao().insertNote(note)
-            }.start()
+            }
             val myIntent = Intent(this, StartActivity::class.java)
             this.startActivity(myIntent)
         }

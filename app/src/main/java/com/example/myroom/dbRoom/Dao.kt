@@ -12,15 +12,15 @@ import kotlinx.coroutines.flow.Flow
 interface Dao {
 
     @Insert
-    fun insertNote( note: Note)
+    suspend fun insertNote( note: Note)
 
     @Query("SELECT * FROM notes")
-    fun getAllNotes(): Flow<List<Note>>
+    suspend fun getAllNotes(): List<Note>
 
     @Delete
-    fun deleteNote(note : Note)
+    suspend fun deleteNote(note : Note)
 
     @Update
-    fun updateNote(note: Note)
+    suspend fun updateNote(note: Note)
 
 }

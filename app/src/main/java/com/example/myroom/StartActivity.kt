@@ -1,26 +1,34 @@
 package com.example.myroom
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.asLiveData
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myroom.databinding.ActivityStartBinding
 import com.example.myroom.dbRoom.MainDb
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class StartActivity : AppCompatActivity(), RecyclerViewEvent {
     lateinit var binding: ActivityStartBinding
     lateinit var db : MainDb
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
         db = MainDb.getDb(this)
-        db.getDao().getAllNotes().asLiveData().observe(this){
-            var adapter = NoteAdapter(it, this)
-            binding.rvNotes.layoutManager = LinearLayoutManager(this)
+        lifecycleScope.launch {
+            var adapter = NoteAdapter(db.getDao().getAllNotes(),this@StartActivity)
+            binding.rvNotes.layoutManager = LinearLayoutManager(this@StartActivity)
             binding.rvNotes.adapter = adapter
         }
+
+
+
 
 
         binding.btnAddNote.setOnClickListener{
@@ -30,23 +38,27 @@ class StartActivity : AppCompatActivity(), RecyclerViewEvent {
     }
 
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
-        db.getDao().getAllNotes().asLiveData().observe(this){
-            var adapter = NoteAdapter(it, this)
-            binding.rvNotes.layoutManager = LinearLayoutManager(this)
+        MyGlobalScope.coroutineScope.launch {
+            var adapter = NoteAdapter(db.getDao().getAllNotes(),this@StartActivity)
+            binding.rvNotes.layoutManager = LinearLayoutManager(this@StartActivity)
             binding.rvNotes.adapter = adapter
         }
-    }
+    }*/
 
     override fun onItemClick(position: Int) {
 
         val intent = Intent(this, NoteDetailActivity::class.java)
-        db.getDao().getAllNotes().asLiveData().observe(this){
-            intent.putExtra("noteID", it[position].id)
-            intent.putExtra("noteTitle", it[position].title)
-            intent.putExtra("noteContent", it[position].content)
+        lifecycleScope.launch {
+
+            var notes = db.getDao().getAllNotes()
+            intent.putExtra("noteID", notes[position].id)
+            intent.putExtra("noteTitle", notes[position].title)
+            intent.putExtra("noteContent", notes[position].content)
             startActivity(intent)
+
+
         }
 
     }
